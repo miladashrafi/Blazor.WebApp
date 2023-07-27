@@ -1,0 +1,32 @@
+﻿<h3>TestComponent</h3>
+
+
+@if (_items is null)
+{
+    <h1>loading ...</h1>
+}
+else
+{
+    <div class="row row-cols-md-6 row-cols-sm-3">
+        @foreach (var item in _items)
+        {
+            <div class="col text-center">
+                @item
+            </div>
+        }
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public int Count { get; set; }
+
+    private IEnumerable<int> _items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+        _items = Enumerable.Range(1, Count);
+    }
+}
